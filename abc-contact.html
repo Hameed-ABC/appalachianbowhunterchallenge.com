@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact · Appalachian Bowhunter Challenge</title>
+  <meta name="description" content="Get in touch with the Appalachian Bowhunter Challenge team."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --midnight:#050b2c;--navy:#0d1f5c;--ridge:#234f93;--mountain:#3f6cab;
+      --skyline:#6c86b7;--topo-orange:#ff8a00;--gold:#ffb400;--sunlight:#ffc93d;
+      --ice:#f7f7f7;--parchment:#e7edf8;--fog:#d6dbe7;--smoke:#94a3c4;
+      --amber:var(--topo-orange);--cream:var(--ice);--bark:var(--midnight);--sage:var(--skyline);
+    }
+    html{scroll-behavior:smooth;}
+    body{background-color:var(--bark);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;font-size:17px;line-height:1.85;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.5rem,5vw,4rem);background:rgba(5,11,44,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,180,0,0.1);}
+    .nav-logo{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .nav-logo-img{width:44px;height:44px;border-radius:50%;background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--gold);overflow:hidden;}
+    .nav-logo-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .nav-wordmark{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);line-height:1.2;}
+    .nav-wordmark span{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);font-weight:400;}
+    .nav-links{display:flex;align-items:center;gap:0.2rem;list-style:none;}
+    .nav-links a{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);text-decoration:none;padding:0.5rem 0.85rem;border-radius:2px;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--cream);}
+    .nav-links a.active{color:var(--gold);}
+    .nav-cta{color:var(--midnight)!important;background:var(--gold)!important;font-weight:600!important;}
+    .nav-cta:hover{background:var(--sunlight)!important;}
+    @media(max-width:860px){.nav-links{display:none;}}
+
+    /* PAGE HEADER */
+    .page-header{padding:10rem clamp(1.5rem,6vw,8rem) 4rem;position:relative;overflow:hidden;background-image:radial-gradient(ellipse at top right,rgba(255,138,0,0.20) 5%,transparent 50%),radial-gradient(ellipse at bottom left,rgba(63,108,171,0.18) 0%,transparent 50%),linear-gradient(180deg,#132d72 0%,#0d1f5c 40%,#050b2c 100%);border-bottom:1px solid rgba(255,180,0,0.08);}
+    .page-header::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.01) 2px,rgba(255,255,255,0.01) 4px);pointer-events:none;}
+    .page-header-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+    .page-eyebrow{font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;animation:fadeUp 0.7s ease 0.1s both;}
+    .page-eyebrow::before{content:'';display:inline-block;width:24px;height:1.5px;background:var(--gold);flex-shrink:0;}
+    .page-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.8rem,7vw,6rem);line-height:0.95;color:var(--cream);animation:fadeUp 0.8s ease 0.25s both;}
+    .page-title em{font-style:italic;color:var(--gold);}
+    .page-sub{margin-top:1.5rem;font-size:1rem;color:var(--smoke);max-width:52ch;animation:fadeUp 0.8s ease 0.4s both;}
+
+    /* LAYOUT */
+    .wrap{max-width:1200px;margin:0 auto;padding:5rem clamp(1.5rem,5vw,4rem) 7rem;display:grid;grid-template-columns:1fr 380px;gap:6rem;align-items:start;}
+    @media(max-width:960px){.wrap{grid-template-columns:1fr;gap:4rem;}}
+
+    /* FORM COLUMN */
+    .form-col{}
+
+    .section-label{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
+    .section-label::before{content:'';flex:0 0 36px;height:2px;background:var(--amber);}
+    .section-label h2{font-family:'Oswald',sans-serif;font-size:clamp(0.72rem,1.8vw,0.88rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--amber);font-weight:600;}
+
+    .form-intro{color:var(--parchment);font-size:0.96rem;line-height:1.8;max-width:56ch;margin-bottom:2.5rem;}
+
+    /* TOPIC TABS */
+    .topic-tabs{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+    .topic-tab{font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.5rem 1rem;border-radius:2px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--smoke);cursor:pointer;transition:all 0.2s;}
+    .topic-tab:hover{border-color:rgba(255,180,0,0.3);color:var(--cream);}
+    .topic-tab.active{background:rgba(255,180,0,0.12);border-color:rgba(255,180,0,0.4);color:var(--gold);}
+
+    /* FORM */
+    .contact-form{display:flex;flex-direction:column;gap:1.4rem;}
+
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+    @media(max-width:560px){.field-row{grid-template-columns:1fr;}}
+
+    .field{display:flex;flex-direction:column;gap:0.4rem;}
+    .field label{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--smoke);}
+    .field label span{color:var(--amber);margin-left:0.2em;}
+
+    .field input,
+    .field select,
+    .field textarea{
+      background:rgba(13,31,92,0.35);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:2px;
+      color:var(--cream);
+      font-family:'Libre Baskerville',Georgia,serif;
+      font-size:0.95rem;
+      padding:0.85rem 1rem;
+      width:100%;
+      transition:border-color 0.2s,background 0.2s;
+      outline:none;
+      -webkit-appearance:none;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder{color:rgba(148,163,196,0.4);}
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(255,180,0,0.45);
+      background:rgba(13,31,92,0.55);
+    }
+    .field select{
+      cursor:pointer;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3c4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 1rem center;
+      padding-right:2.5rem;
+    }
+    .field select option{background:#0d1f5c;color:var(--cream);}
+    .field textarea{resize:vertical;min-height:160px;line-height:1.7;}
+
+    .field-hint{font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:0.1em;color:rgba(148,163,196,0.45);margin-top:0.2rem;}
+
+    /* CHECKBOX */
+    .checkbox-row{display:flex;align-items:flex-start;gap:0.8rem;}
+    .checkbox-row input[type="checkbox"]{
+      width:18px;height:18px;flex-shrink:0;margin-top:0.15rem;
+      accent-color:var(--gold);cursor:pointer;
+      border:1px solid rgba(255,255,255,0.15);border-radius:2px;background:rgba(13,31,92,0.4);
+    }
+    .checkbox-label{font-size:0.85rem;color:var(--smoke);line-height:1.6;cursor:pointer;}
+    .checkbox-label a{color:var(--gold);text-decoration:none;}
+    .checkbox-label a:hover{color:var(--sunlight);}
+
+    /* SUBMIT */
+    .submit-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:0.5rem;}
+    .btn-submit{
+      display:inline-block;font-family:'Oswald',sans-serif;font-size:0.8rem;font-weight:600;
+      letter-spacing:0.22em;text-transform:uppercase;color:var(--midnight);background:var(--gold);
+      padding:1rem 2.4rem;border-radius:2px;border:none;cursor:pointer;
+      transition:background 0.2s,transform 0.15s;
+    }
+    .btn-submit:hover{background:var(--sunlight);transform:translateY(-1px);}
+    .btn-submit:active{transform:translateY(0);}
+    .submit-note{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--smoke);}
+
+    /* SUCCESS STATE */
+    .form-success{
+      display:none;
+      padding:2.5rem;
+      background:rgba(255,180,0,0.07);
+      border:1px solid rgba(255,180,0,0.25);
+      border-radius:2px;
+      text-align:center;
+    }
+    .form-success.visible{display:block;}
+    .form-success-icon{font-size:2.5rem;margin-bottom:1rem;}
+    .form-success h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:0.6rem;}
+    .form-success p{color:var(--smoke);font-size:0.95rem;}
+
+    /* SIDEBAR / INFO COLUMN */
+    .info-col{position:sticky;top:6rem;}
+
+    .info-block{margin-bottom:2.5rem;padding:2rem 1.8rem;background:rgba(13,31,92,0.35);border:1px solid rgba(255,180,0,0.12);border-radius:2px;}
+    .info-block-title{font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6rem;}
+    .info-block-title::after{content:'';flex:1;height:1px;background:rgba(255,138,0,0.15);}
+
+    .info-item{display:flex;gap:0.8rem;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .info-item:last-child{border-bottom:none;padding-bottom:0;}
+    .info-item-icon{font-size:1rem;flex-shrink:0;margin-top:0.1rem;}
+    .info-item-content{}
+    .info-item-label{font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.15rem;}
+    .info-item-value{font-family:'Oswald',sans-serif;font-size:0.82rem;letter-spacing:0.08em;color:var(--cream);}
+    .info-item-value a{color:var(--gold);text-decoration:none;}
+    .info-item-value a:hover{color:var(--sunlight);}
+
+    .faq-list{display:flex;flex-direction:column;gap:0;}
+    .faq-item{border-bottom:1px solid rgba(255,255,255,0.05);}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{
+      font-family:'Oswald',sans-serif;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;
+      color:var(--cream);padding:0.9rem 0;cursor:pointer;display:flex;justify-content:space-between;
+      align-items:center;gap:0.5rem;transition:color 0.2s;user-select:none;
+    }
+    .faq-q:hover{color:var(--gold);}
+    .faq-q-arrow{font-size:0.8rem;color:var(--smoke);transition:transform 0.25s;flex-shrink:0;}
+    .faq-item.open .faq-q-arrow{transform:rotate(180deg);}
+    .faq-item.open .faq-q{color:var(--gold);}
+    .faq-a{font-size:0.85rem;color:var(--smoke);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s;}
+    .faq-item.open .faq-a{max-height:200px;padding-bottom:0.9rem;}
+
+    .social-row{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem;}
+    .social-btn{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 0.9rem;border-radius:2px;text-decoration:none;transition:all 0.2s;}
+    .social-btn:hover{border-color:rgba(255,180,0,0.3);color:var(--gold);}
+
+    /* FOOTER */
+    .footer{background:rgba(3,7,24,0.95);border-top:1px solid rgba(255,255,255,0.05);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:2rem clamp(1.5rem,5vw,4rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(148,163,196,0.35);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(148,163,196,0.35);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--gold);}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-img">ABC</div>
+      <div class="nav-wordmark">Appalachian<span>Bowhunter Challenge</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Recaps</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="register.html" class="nav-cta">Register Now</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-eyebrow">Get in Touch</div>
+      <h1 class="page-title">Let's <em>Talk.</em></h1>
+      <p class="page-sub">Questions about registration, sponsorship, the event format, or something else entirely — we read everything.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- FORM COLUMN -->
+    <div class="form-col reveal">
+      <div class="section-label"><h2>Send a Message</h2></div>
+      <p class="form-intro">Use the form below for anything — registration questions, sponsorship inquiries, media requests, or general feedback. We'll get back to you within 48 hours.</p>
+
+      <!-- TOPIC QUICK-SELECT -->
+      <div class="topic-tabs">
+        <button class="topic-tab active" onclick="setTopic(this,'General Question')">General</button>
+        <button class="topic-tab" onclick="setTopic(this,'Registration')">Registration</button>
+        <button class="topic-tab" onclick="setTopic(this,'Sponsorship')">Sponsorship</button>
+        <button class="topic-tab" onclick="setTopic(this,'Media / Press')">Media</button>
+        <button class="topic-tab" onclick="setTopic(this,'Volunteering')">Volunteer</button>
+      </div>
+
+      <!-- FORM -->
+      <!-- NOTE FOR WORDPRESS: Replace this form with a WPForms or Contact Form 7 shortcode.
+           The field names and structure below are your design reference.
+           Connect the form to your email via the plugin's notification settings. -->
+      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="firstName">First Name <span>*</span></label>
+            <input type="text" id="firstName" name="firstName" placeholder="Gabe" required/>
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name <span>*</span></label>
+            <input type="text" id="lastName" name="lastName" placeholder="Hrabosky" required/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address <span>*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required/>
+        </div>
+
+        <div class="field">
+          <label for="topic">Topic <span>*</span></label>
+          <select id="topic" name="topic" required>
+            <option value="">Select a topic...</option>
+            <option value="General Question">General Question</option>
+            <option value="Registration">Registration</option>
+            <option value="Sponsorship">Sponsorship Inquiry</option>
+            <option value="Media / Press">Media / Press</option>
+            <option value="Volunteering">Volunteering</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field" id="sponsorField" style="display:none;">
+          <label for="company">Company / Brand Name</label>
+          <input type="text" id="company" name="company" placeholder="Your brand or organization"/>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span>*</span></label>
+          <textarea id="message" name="message" placeholder="What's on your mind..." required></textarea>
+          <div class="field-hint">Be as specific as you'd like — the more detail, the faster we can help.</div>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="newsletter" name="newsletter" value="yes"/>
+          <label class="checkbox-label" for="newsletter">
+            Add me to the ABC mailing list — I'd like to hear about 2027 registration, event updates, and recaps.
+          </label>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn-submit">Send Message</button>
+          <span class="submit-note">We respond within 48 hours</span>
+        </div>
+
+      </form>
+
+      <!-- SUCCESS MESSAGE -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✓</div>
+        <h3>Message Sent.</h3>
+        <p>Thanks for reaching out. We'll be in touch within 48 hours — usually sooner.</p>
+      </div>
+    </div>
+
+    <!-- INFO COLUMN -->
+    <aside class="info-col">
+
+      <div class="info-block reveal">
+        <div class="info-block-title">Contact Info</div>
+        <div class="info-item">
+          <div class="info-item-icon">📍</div>
+          <div class="info-item-content">
+            <div class="info-item-label">Event Location</div>
+            <div class="info-item-value">Winterplace Ski Resort<br>Ghent, West Virginia</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-item-icon">📅</div>
+          <div class="info-item-content">
+            <div class="info-item-label">Next Event</div>
+            <div class="info-item-value">Spring 2027</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-item-icon">✉️</div>
+          <div class="info-item-content">
+            <div class="info-item-label">Email</div>
+            <div class="info-item-value"><a href="mailto:info@appalachianbowhunterchallenge.com">info@appalachianbowhunterchallenge.com</a></div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-item-icon">⏱</div>
+          <div class="info-item-content">
+            <div class="info-item-label">Response Time</div>
+            <div class="info-item-value">Within 48 hours</div>
+          </div>
+        </div>
+        <div style="margin-top:1.2rem;">
+          <div class="info-item-label" style="margin-bottom:0.6rem;">Follow Along</div>
+          <div class="social-row">
+            <a href="#" class="social-btn">📘 Facebook</a>
+            <a href="#" class="social-btn">📷 Instagram</a>
+            <a href="#" class="social-btn">▶ YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block reveal">
+        <div class="info-block-title">Common Questions</div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              When does 2027 registration open?
+              <span class="faq-q-arrow">▾</span>
+            </div>
+            <div class="faq-a">Registration for the 2027 event opens later this year. Join the mailing list using the form to the left and you'll be the first to know when spots become available.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              How do I register — is it through this site?
+              <span class="faq-q-arrow">▾</span>
+            </div>
+            <div class="faq-a">Registration is handled through RunReg, our official registration platform. You can access it via the Register page. Spots are limited and fill quickly.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              I'm interested in sponsoring the 2027 event.
+              <span class="faq-q-arrow">▾</span>
+            </div>
+            <div class="faq-a">We'd love to hear from you. Select "Sponsorship Inquiry" in the topic dropdown and tell us about your brand. We'll follow up with our 2027 sponsorship package.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Can I volunteer at the event?
+              <span class="faq-q-arrow">▾</span>
+            </div>
+            <div class="faq-a">Yes — volunteers are a huge part of what makes this event work. Select "Volunteering" as your topic and let us know your availability and what you'd like to help with.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              I'm a journalist or content creator. Who do I contact?
+              <span class="faq-q-arrow">▾</span>
+            </div>
+            <div class="faq-a">Select "Media / Press" as your topic. Include your outlet, what you're working on, and your timeline. We'll respond within 48 hours.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Appalachian Bowhunter Challenge</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+        <a href="sponsors.html">Sponsors</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+    },{threshold:0.06});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Topic tabs → sync select
+    function setTopic(btn, value) {
+      document.querySelectorAll('.topic-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const sel = document.getElementById('topic');
+      sel.value = value;
+      document.getElementById('sponsorField').style.display = (value === 'Sponsorship') ? '' : 'none';
+    }
+
+    // Show sponsor field when dropdown changes
+    document.getElementById('topic').addEventListener('change', function(){
+      document.getElementById('sponsorField').style.display = (this.value === 'Sponsorship Inquiry') ? '' : 'none';
+    });
+
+    // FAQ accordion
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // Form submit (demo — replace with WPForms/CF7 in WordPress)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      // Basic validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.borderColor = 'rgba(255,80,80,0.5)';
+          valid = false;
+        } else {
+          field.style.borderColor = '';
+        }
+      });
+      if (!valid) return;
+      // Show success
+      form.style.display = 'none';
+      success.classList.add('visible');
+      window.scrollTo({top: form.offsetTop - 100, behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

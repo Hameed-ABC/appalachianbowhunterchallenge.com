@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recaps & Blog · Appalachian Bowhunter Challenge</title>
+  <meta name="description" content="Event recaps, training articles, and stories from the Appalachian Bowhunter Challenge."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --midnight:#050b2c; --navy:#0d1f5c; --ridge:#234f93; --mountain:#3f6cab;
+      --skyline:#6c86b7; --topo-orange:#ff8a00; --gold:#ffb400; --sunlight:#ffc93d;
+      --ice:#f7f7f7; --parchment:#e7edf8; --fog:#d6dbe7; --smoke:#94a3c4;
+      --amber:var(--topo-orange); --cream:var(--ice); --bark:var(--midnight); --sage:var(--skyline);
+    }
+    html { scroll-behavior:smooth; }
+    body { background-color:var(--bark); color:var(--cream); font-family:'Libre Baskerville',Georgia,serif; font-size:17px; line-height:1.85; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.5rem,5vw,4rem);background:rgba(5,11,44,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,180,0,0.1);}
+    .nav-logo{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .nav-logo-img{width:44px;height:44px;border-radius:50%;background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--gold);overflow:hidden;}
+    .nav-logo-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .nav-wordmark{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);line-height:1.2;}
+    .nav-wordmark span{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);font-weight:400;}
+    .nav-links{display:flex;align-items:center;gap:0.2rem;list-style:none;}
+    .nav-links a{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);text-decoration:none;padding:0.5rem 0.85rem;border-radius:2px;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--cream);}
+    .nav-links a.active{color:var(--gold);}
+    .nav-cta{color:var(--midnight)!important;background:var(--gold)!important;font-weight:600!important;}
+    .nav-cta:hover{background:var(--sunlight)!important;}
+    @media(max-width:860px){.nav-links{display:none;}}
+
+    /* PAGE HEADER */
+    .page-header{padding:10rem clamp(1.5rem,6vw,8rem) 4rem;position:relative;overflow:hidden;background-image:radial-gradient(ellipse at top right,rgba(255,138,0,0.20) 5%,transparent 50%),radial-gradient(ellipse at bottom left,rgba(63,108,171,0.18) 0%,transparent 50%),linear-gradient(180deg,#132d72 0%,#0d1f5c 40%,#050b2c 100%);border-bottom:1px solid rgba(255,180,0,0.08);}
+    .page-header::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.01) 2px,rgba(255,255,255,0.01) 4px);pointer-events:none;}
+    .page-header-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+    .page-eyebrow{font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;animation:fadeUp 0.7s ease 0.1s both;}
+    .page-eyebrow::before{content:'';display:inline-block;width:24px;height:1.5px;background:var(--gold);flex-shrink:0;}
+    .page-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.8rem,7vw,6rem);line-height:0.95;color:var(--cream);animation:fadeUp 0.8s ease 0.25s both;}
+    .page-title em{font-style:italic;color:var(--gold);}
+    .page-sub{margin-top:1.5rem;font-size:1rem;color:var(--smoke);max-width:52ch;animation:fadeUp 0.8s ease 0.4s both;}
+
+    /* LAYOUT */
+    .blog-wrap{max-width:1200px;margin:0 auto;padding:5rem clamp(1.5rem,5vw,4rem) 7rem;display:grid;grid-template-columns:1fr 320px;gap:5rem;align-items:start;}
+    @media(max-width:960px){.blog-wrap{grid-template-columns:1fr;gap:4rem;}}
+
+    /* FEATURED POST */
+    .featured-post{margin-bottom:4rem;}
+    .featured-post-photo{width:100%;height:440px;border-radius:2px;overflow:hidden;position:relative;background:linear-gradient(160deg,rgba(255,138,0,0.1) 0%,rgba(5,11,44,0.9) 100%);border:1px solid rgba(255,180,0,0.12);margin-bottom:2rem;}
+    .featured-post-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease;}
+    .featured-post:hover .featured-post-photo img{transform:scale(1.02);}
+    .featured-post-photo-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(228,168,74,0.3);border:2px dashed rgba(228,168,74,0.12);}
+    .featured-post-photo-ph span{font-size:2.5rem;opacity:0.25;}
+
+    .post-tag{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;display:inline-block;}
+    .post-tag.recap{color:var(--amber);}
+    .post-tag.training{color:var(--skyline);}
+    .post-tag.gear{color:var(--smoke);}
+
+    .featured-post-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;line-height:1.05;color:var(--cream);margin-bottom:1rem;text-decoration:none;display:block;transition:color 0.2s;}
+    .featured-post-title:hover{color:var(--gold);}
+    .featured-post-title em{font-style:italic;}
+
+    .post-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+    .post-meta-item{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--smoke);}
+
+    .featured-post-excerpt{color:var(--parchment);font-size:1rem;line-height:1.8;max-width:64ch;margin-bottom:1.5rem;}
+
+    .read-more-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap 0.2s;}
+    .read-more-link:hover{gap:0.9rem;}
+
+    /* DIVIDER */
+    .post-divider{display:flex;align-items:center;gap:1.2rem;margin:3.5rem 0;opacity:0.25;}
+    .post-divider::before,.post-divider::after{content:'';flex:1;height:1px;background:var(--smoke);}
+    .post-divider span{font-size:0.7rem;color:var(--gold);}
+
+    /* ARTICLE CARDS */
+    .posts-grid{display:flex;flex-direction:column;gap:0;}
+
+    .post-card{display:grid;grid-template-columns:160px 1fr;gap:1.5rem;padding:2rem 0;border-bottom:1px solid rgba(255,255,255,0.06);text-decoration:none;align-items:start;transition:background 0.2s;}
+    .post-card:first-child{border-top:1px solid rgba(255,255,255,0.06);}
+    .post-card:hover .post-card-title{color:var(--gold);}
+
+    .post-card-thumb{width:160px;height:110px;border-radius:2px;overflow:hidden;background:rgba(13,31,92,0.5);border:1px solid rgba(255,180,0,0.1);flex-shrink:0;}
+    .post-card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+    .post-card:hover .post-card-thumb img{transform:scale(1.05);}
+    .post-card-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;opacity:0.2;}
+
+    .post-card-info{}
+    .post-card-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.25rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:0.5rem;transition:color 0.2s;}
+    .post-card-excerpt{font-size:0.85rem;color:var(--smoke);line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+    @media(max-width:560px){.post-card{grid-template-columns:1fr;} .post-card-thumb{width:100%;height:180px;}}
+
+    /* SIDEBAR */
+    .sidebar{position:sticky;top:6rem;}
+
+    .sidebar-block{margin-bottom:3rem;}
+    .sidebar-title{font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem;}
+    .sidebar-title::after{content:'';flex:1;height:1px;background:rgba(255,138,0,0.15);}
+
+    .sidebar-cats{display:flex;flex-direction:column;gap:0;}
+    .sidebar-cat{display:flex;align-items:center;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;transition:color 0.2s;}
+    .sidebar-cat:hover{color:var(--gold);}
+    .sidebar-cat-name{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--smoke);}
+    .sidebar-cat:hover .sidebar-cat-name{color:var(--gold);}
+    .sidebar-cat-count{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.1em;color:rgba(255,180,0,0.35);background:rgba(255,180,0,0.07);border:1px solid rgba(255,180,0,0.12);border-radius:10px;padding:0.1rem 0.5rem;}
+
+    .sidebar-recent{display:flex;flex-direction:column;gap:0;}
+    .sidebar-recent-item{display:flex;gap:0.8rem;padding:0.9rem 0;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;align-items:flex-start;}
+    .sidebar-recent-thumb{width:54px;height:42px;border-radius:2px;background:rgba(13,31,92,0.5);flex-shrink:0;overflow:hidden;border:1px solid rgba(255,180,0,0.08);}
+    .sidebar-recent-thumb img{width:100%;height:100%;object-fit:cover;}
+    .sidebar-recent-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;opacity:0.2;}
+    .sidebar-recent-title{font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;color:var(--cream);line-height:1.25;transition:color 0.2s;}
+    .sidebar-recent-item:hover .sidebar-recent-title{color:var(--gold);}
+
+    .sidebar-cta{background:linear-gradient(135deg,rgba(255,138,0,0.15) 0%,rgba(13,31,92,0.5) 100%);border:1px solid rgba(255,180,0,0.2);padding:1.8rem 1.5rem;border-radius:2px;text-align:center;}
+    .sidebar-cta h4{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;font-style:italic;color:var(--cream);margin-bottom:0.6rem;}
+    .sidebar-cta p{font-size:0.82rem;color:var(--smoke);margin-bottom:1.2rem;line-height:1.6;}
+    .sidebar-cta-btn{display:inline-block;font-family:'Oswald',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--midnight);background:var(--gold);padding:0.7rem 1.5rem;border-radius:2px;text-decoration:none;transition:background 0.2s;}
+    .sidebar-cta-btn:hover{background:var(--sunlight);}
+
+    /* FOOTER */
+    .footer{background:rgba(3,7,24,0.95);border-top:1px solid rgba(255,255,255,0.05);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:2rem clamp(1.5rem,5vw,4rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(148,163,196,0.35);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(148,163,196,0.35);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--gold);}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-img">ABC</div>
+      <div class="nav-wordmark">Appalachian<span>Bowhunter Challenge</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html" class="active">Recaps</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="register.html" class="nav-cta">Register Now</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-eyebrow">Stories from the Mountain</div>
+      <h1 class="page-title">Recaps &amp; <em>Field Notes.</em></h1>
+      <p class="page-sub">Event recaps, training guides, gear breakdowns, and everything from the trail.</p>
+    </div>
+  </div>
+
+  <div class="blog-wrap">
+
+    <!-- MAIN COLUMN -->
+    <main>
+
+      <!-- FEATURED -->
+      <article class="featured-post reveal">
+        <div class="featured-post-photo">
+          <!-- Replace with: <img src="recap-2026-hero.jpg" alt="2026 ABC Recap"> -->
+          <div class="featured-post-photo-ph"><span>📷</span>Add featured image here</div>
+        </div>
+        <span class="post-tag recap">2026 Event Recap</span>
+        <a href="blog-2026-recap.html" class="featured-post-title">Higher <em>Ground</em> — Inside the Inaugural Appalachian Bowhunter Challenge</a>
+        <div class="post-meta">
+          <span class="post-meta-item">May 2026</span>
+          <span class="post-meta-item">Winterplace Ski Resort, WV</span>
+          <span class="post-meta-item">10 min read</span>
+        </div>
+        <p class="featured-post-excerpt">There's a certain kind of weekend that sneaks up on you. You show up expecting a contest — targets, scorecards, a podium — and somewhere between the first arrow and the last campfire laugh, it becomes something else entirely. Nobody mailed it in after a rough segment. Nobody made excuses when the mountain took something from them.</p>
+        <a href="blog-2026-recap.html" class="read-more-link">Read the full recap →</a>
+      </article>
+
+      <div class="post-divider"><span>◈</span></div>
+
+      <!-- POST LIST -->
+      <div class="posts-grid">
+
+        <a href="#" class="post-card reveal">
+          <div class="post-card-thumb">
+            <!-- <img src="pack-race-thumb.jpg" alt=""> -->
+            <div class="post-card-thumb-ph">🏋️</div>
+          </div>
+          <div class="post-card-info">
+            <div class="post-meta" style="margin-bottom:0.4rem;">
+              <span class="post-meta-item">Training</span>
+              <span class="post-meta-item">June 2026</span>
+            </div>
+            <div class="post-card-title">How to Train for the ABC Pack Race — A 12-Week Plan</div>
+            <p class="post-card-excerpt">The pack race is won or lost before you ever show up at Winterplace. Here's exactly how to build the strength and endurance to move through the mountain with a load on your back.</p>
+          </div>
+        </a>
+
+        <a href="#" class="post-card reveal">
+          <div class="post-card-thumb">
+            <div class="post-card-thumb-ph">🎯</div>
+          </div>
+          <div class="post-card-info">
+            <div class="post-meta" style="margin-bottom:0.4rem;">
+              <span class="post-meta-item">Results</span>
+              <span class="post-meta-item">May 2026</span>
+            </div>
+            <div class="post-card-title">2026 Final Results — Division Winners & Overall Champion</div>
+            <p class="post-card-excerpt">Complete results from the inaugural Appalachian Bowhunter Challenge. Every division, every podium, and the story behind the numbers.</p>
+          </div>
+        </a>
+
+        <a href="#" class="post-card reveal">
+          <div class="post-card-thumb">
+            <div class="post-card-thumb-ph">🏹</div>
+          </div>
+          <div class="post-card-info">
+            <div class="post-meta" style="margin-bottom:0.4rem;">
+              <span class="post-meta-item">Behind the Bracket</span>
+              <span class="post-meta-item">May 2026</span>
+            </div>
+            <div class="post-card-title">You Can't Outrun a Bad Shot — Inside the Head-to-Head Bracket</div>
+            <p class="post-card-excerpt">The bracket was chaos by design. After sandbags and sled drags, you still had to step up and make the shot. Here's what it looked like from inside the competition floor.</p>
+          </div>
+        </a>
+
+        <a href="#" class="post-card reveal">
+          <div class="post-card-thumb">
+            <div class="post-card-thumb-ph">🎒</div>
+          </div>
+          <div class="post-card-info">
+            <div class="post-meta" style="margin-bottom:0.4rem;">
+              <span class="post-meta-item">Gear</span>
+              <span class="post-meta-item">April 2026</span>
+            </div>
+            <div class="post-card-title">What Competitors Carried — Gear from the 2026 Field</div>
+            <p class="post-card-excerpt">From weighted pack setups to bow configurations, here's a breakdown of what the top finishers had on their backs and in their hands.</p>
+          </div>
+        </a>
+
+        <a href="#" class="post-card reveal">
+          <div class="post-card-thumb">
+            <div class="post-card-thumb-ph">🏔️</div>
+          </div>
+          <div class="post-card-info">
+            <div class="post-meta" style="margin-bottom:0.4rem;">
+              <span class="post-meta-item">Event Preview</span>
+              <span class="post-meta-item">March 2026</span>
+            </div>
+            <div class="post-card-title">What to Expect at Your First ABC — A Competitor's Guide</div>
+            <p class="post-card-excerpt">First time registering? Here's everything you need to know about the format, the stages, the venue, and how to show up ready.</p>
+          </div>
+        </a>
+
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-block reveal">
+        <div class="sidebar-title">Categories</div>
+        <div class="sidebar-cats">
+          <a href="#" class="sidebar-cat">
+            <span class="sidebar-cat-name">Event Recaps</span>
+            <span class="sidebar-cat-count">1</span>
+          </a>
+          <a href="#" class="sidebar-cat">
+            <span class="sidebar-cat-name">Results</span>
+            <span class="sidebar-cat-count">1</span>
+          </a>
+          <a href="#" class="sidebar-cat">
+            <span class="sidebar-cat-name">Training</span>
+            <span class="sidebar-cat-count">1</span>
+          </a>
+          <a href="#" class="sidebar-cat">
+            <span class="sidebar-cat-name">Gear</span>
+            <span class="sidebar-cat-count">1</span>
+          </a>
+          <a href="#" class="sidebar-cat">
+            <span class="sidebar-cat-name">Behind the Scenes</span>
+            <span class="sidebar-cat-count">2</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-block reveal">
+        <div class="sidebar-title">Recent Posts</div>
+        <div class="sidebar-recent">
+          <a href="blog-2026-recap.html" class="sidebar-recent-item">
+            <div class="sidebar-recent-thumb"><div class="sidebar-recent-thumb-ph">📷</div></div>
+            <div class="sidebar-recent-title">Higher Ground — Inside the Inaugural ABC</div>
+          </a>
+          <a href="#" class="sidebar-recent-item">
+            <div class="sidebar-recent-thumb"><div class="sidebar-recent-thumb-ph">📷</div></div>
+            <div class="sidebar-recent-title">2026 Final Results & Division Winners</div>
+          </a>
+          <a href="#" class="sidebar-recent-item">
+            <div class="sidebar-recent-thumb"><div class="sidebar-recent-thumb-ph">📷</div></div>
+            <div class="sidebar-recent-title">How to Train for the Pack Race</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-block reveal">
+        <div class="sidebar-cta">
+          <h4>Ready for 2027?</h4>
+          <p>Registration for next year opens soon. Get your spot before they're gone.</p>
+          <a href="register.html" class="sidebar-cta-btn">Register Now</a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Appalachian Bowhunter Challenge</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} });
+    },{threshold:0.06});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

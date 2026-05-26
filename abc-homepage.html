@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Appalachian Bowhunter Challenge</title>
+  <meta name="description" content="The Appalachian Bowhunter Challenge — a three-stage competition testing fitness, shooting ability, and composure. Winterplace Ski Resort, West Virginia."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --midnight:    #050b2c;
+      --navy:        #0d1f5c;
+      --ridge:       #234f93;
+      --mountain:    #3f6cab;
+      --skyline:     #6c86b7;
+      --topo-orange: #ff8a00;
+      --gold:        #ffb400;
+      --sunlight:    #ffc93d;
+      --ice:         #f7f7f7;
+      --parchment:   #e7edf8;
+      --fog:         #d6dbe7;
+      --smoke:       #94a3c4;
+      --amber:       var(--topo-orange);
+      --cream:       var(--ice);
+      --bark:        var(--midnight);
+      --sage:        var(--skyline);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bark);
+      color: var(--cream);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem clamp(1.5rem, 5vw, 4rem);
+      background: rgba(5,11,44,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,180,0,0.1);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,180,0,0.1);
+      border: 1px solid rgba(255,180,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .nav-logo-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+    .nav-wordmark {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+    .nav-wordmark span {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      padding: 0.5rem 0.85rem;
+      border-radius: 2px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); background: rgba(255,255,255,0.05); }
+
+    .nav-cta {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--midnight) !important;
+      background: var(--gold) !important;
+      padding: 0.55rem 1.2rem !important;
+      border-radius: 2px;
+      font-weight: 600;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--sunlight) !important; }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-mobile-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: flex; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      padding: 0 clamp(1.5rem, 6vw, 8rem) clamp(4rem, 8vh, 7rem);
+      background-image:
+      radial-gradient(ellipse at top right, rgba(255,138,0,0.28) 5%, transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(63,108,171,0.22) 0%, transparent 50%),
+      linear-gradient(180deg, #132d72 0%, #0d1f5c 38%, #081238 72%, #050b2c 100%),
+      url('ABC-background.jpg');
+
+      background-repeat: no-repeat;
+      background-position: center 36%;
+      background-size: 2600px;
+      background-blend-mode: soft-light;
+
+      padding: 0 clamp(1.5rem, 6vw, 8rem) clamp(3rem, 6vh, 6rem);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 280px;
+      background: linear-gradient(to bottom, transparent, var(--midnight));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(3.2rem, 9vw, 8rem);
+      line-height: 0.93;
+      color: var(--cream);
+      max-width: 16ch;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--smoke);
+      max-width: 50ch;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    .hero-actions {
+      margin-top: 2.8rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.85s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--midnight);
+      background: var(--gold);
+      padding: 1rem 2.2rem;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--sunlight); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--fog);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 1rem 2rem;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,180,0,0.5); color: var(--cream); transform: translateY(-1px); }
+    .btn-arrow { font-size: 1rem; transition: transform 0.2s; }
+    .btn-secondary:hover .btn-arrow { transform: translateX(3px); }
+
+    .hero-meta {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+    }
+
+    .hero-meta-item {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+    .hero-meta-item strong {
+      display: block;
+      color: var(--cream);
+      font-size: 0.85rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .hero-rule {
+      position: absolute;
+      right: clamp(1.5rem, 6vw, 8rem);
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(228,168,74,0.28);
+      z-index: 1;
+      opacity: 0;
+      animation: fadeIn 2s ease 1.4s forwards;
+    }
+    @media (max-width: 700px) { .hero-rule { display: none; } }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vh, 7rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-label::before {
+      content: '';
+      flex: 0 0 36px;
+      height: 2px;
+      background: var(--amber);
+    }
+    .section-label h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(0.72rem, 1.8vw, 0.88rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    /* ── WHAT IS ABC ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .about-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .about-text h3 em { font-style: italic; color: var(--gold); }
+
+    .about-text p {
+      color: var(--parchment);
+      margin-bottom: 1.4rem;
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    .about-text .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      margin-top: 0.5rem;
+      transition: gap 0.2s;
+    }
+    .about-text .read-more:hover { gap: 1rem; }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background:
+        linear-gradient(160deg, rgba(255,138,0,0.12) 0%, rgba(13,31,92,0.6) 60%, rgba(5,11,44,0.9) 100%),
+        rgba(13,31,92,0.4);
+      border-radius: 2px;
+      border: 1px solid rgba(255,180,0,0.12);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+      position: relative;
+    }
+    .about-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-photo-caption {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(228,168,74,0.6);
+    }
+
+    .about-stat-row {
+      display: flex;
+      gap: 0;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(255,180,0,0.15);
+    }
+    .about-stat {
+      flex: 1;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,180,0,0.15);
+    }
+    .about-stat:last-child { border-right: none; }
+    .about-stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+    .about-stat-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    @media (max-width: 860px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { order: -1; }
+      .about-photo { aspect-ratio: 16/9; }
+    }
+
+    /* ── THREE STAGES ── */
+    .stages-section {
+      background: linear-gradient(180deg, var(--midnight) 0%, rgba(13,31,92,0.15) 50%, var(--midnight) 100%);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stages-intro {
+      max-width: 640px;
+      margin-bottom: 4rem;
+    }
+    .stages-intro h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .stages-intro p { color: var(--smoke); font-size: 1rem; }
+
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,180,0,0.1);
+      border: 1px solid rgba(255,180,0,0.1);
+    }
+
+    .stage-card {
+      background: rgba(5,11,44,0.85);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .stage-card:hover { background: rgba(13,31,92,0.7); }
+
+    .stage-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--amber);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .stage-card:hover::before { transform: scaleX(1); }
+
+    .stage-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--amber);
+      opacity: 0.12;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+    }
+
+    .stage-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .stage-card h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .stage-card p {
+      font-size: 0.92rem;
+      color: var(--smoke);
+      line-height: 1.7;
+    }
+
+    .stage-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid rgba(255,138,0,0.25);
+      padding: 0.3rem 0.7rem;
+      border-radius: 1px;
+    }
+
+    @media (max-width: 700px) {
+      .stages-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── PULL QUOTE ── */
+    .quote-section {
+      background: linear-gradient(135deg, rgba(35,79,147,0.20) 0%, rgba(5,11,44,0.6) 100%);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+
+    .pull-quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      line-height: 1.5;
+      color: var(--cream);
+      max-width: 760px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+    .pull-quote-text::before {
+      content: '\201C';
+      font-size: 6rem;
+      line-height: 0;
+      color: var(--amber);
+      opacity: 0.2;
+      position: absolute;
+      top: 2rem;
+      left: -2rem;
+    }
+
+    .pull-quote-attribution {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+    .pull-quote-attribution span { color: var(--gold); }
+
+    /* ── LATEST RECAP ── */
+    .recap-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .recap-featured {
+      text-decoration: none;
+      display: block;
+    }
+
+    .recap-featured-photo {
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(160deg, rgba(255,138,0,0.1) 0%, rgba(5,11,44,0.9) 100%);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(255,180,0,0.12);
+    }
+    .recap-featured-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .recap-featured:hover .recap-featured-photo img { transform: scale(1.03); }
+
+    .recap-featured-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.6rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(228,168,74,0.3);
+      border: 2px dashed rgba(228,168,74,0.15);
+    }
+    .recap-featured-photo-placeholder span { font-size: 2.5rem; opacity: 0.3; }
+
+    .recap-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .recap-featured-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      transition: color 0.2s;
+    }
+    .recap-featured:hover .recap-featured-title { color: var(--gold); }
+    .recap-featured-title em { font-style: italic; }
+
+    .recap-featured-excerpt {
+      color: var(--smoke);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+
+    .recap-read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .recap-sidebar { display: flex; flex-direction: column; gap: 0; }
+
+    .recap-sidebar-item {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-decoration: none;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .recap-sidebar-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+
+    .recap-sidebar-thumb {
+      width: 80px;
+      height: 60px;
+      flex-shrink: 0;
+      background: rgba(13,31,92,0.6);
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(255,180,0,0.1);
+    }
+    .recap-sidebar-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .recap-sidebar-thumb-placeholder {
+      width: 100%; height: 100%;
+      background: rgba(255,180,0,0.05);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; opacity: 0.3;
+    }
+
+    .recap-sidebar-info { flex: 1; min-width: 0; }
+    .recap-sidebar-date {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      margin-bottom: 0.3rem;
+    }
+    .recap-sidebar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.25;
+      transition: color 0.2s;
+    }
+    .recap-sidebar-item:hover .recap-sidebar-title { color: var(--gold); }
+
+    .recap-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      margin-top: 1.5rem;
+      transition: color 0.2s;
+    }
+    .recap-all-link:hover { color: var(--gold); }
+
+    @media (max-width: 860px) {
+      .recap-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 0;
+      opacity: 0.3;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--smoke);
+    }
+    .divider span { font-size: 0.8rem; color: var(--gold); }
+
+    /* ── SPONSORS STRIP ── */
+    .sponsors-strip {
+      background: rgba(13,31,92,0.25);
+      border-top: 1px solid rgba(255,180,0,0.08);
+      border-bottom: 1px solid rgba(255,180,0,0.08);
+    }
+
+    .sponsors-strip-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .sponsors-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(228,168,74,0.4);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sponsors-logos {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .sponsor-logo-pill {
+      height: 40px;
+      padding: 0 1.2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,180,0,0.12);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(228,168,74,0.4);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .sponsor-logo-pill:hover { border-color: rgba(255,180,0,0.3); color: var(--gold); }
+    .sponsor-logo-pill img { height: 28px; width: auto; object-fit: contain; opacity: 0.6; transition: opacity 0.2s; }
+    .sponsor-logo-pill:hover img { opacity: 1; }
+
+    /* ── REGISTER CTA ── */
+    .register-cta {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .register-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center top, rgba(255,138,0,0.18) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(13,31,92,0.3) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .register-cta-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .register-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+    .register-cta h3 span { color: var(--gold); }
+
+    .register-cta p {
+      font-size: 1rem;
+      color: var(--smoke);
+      max-width: 48ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+
+    .register-meta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .register-meta-item {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+    .register-meta-item strong { color: var(--cream); display: block; margin-bottom: 0.1rem; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: rgba(3,7,24,0.95);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem clamp(1.5rem, 5vw, 4rem) 2rem;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand {}
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+    .footer-logo em { font-style: italic; color: var(--gold); }
+    .footer-tagline {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(228,168,74,0.45);
+      margin-bottom: 1.2rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--smoke);
+      line-height: 1.7;
+      max-width: 30ch;
+      margin: 0;
+    }
+
+    .footer-col h5 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col ul a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--cream); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem clamp(1.5rem, 5vw, 4rem) 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(148,163,196,0.35);
+    }
+
+    @media (max-width: 860px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 500px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-img">
+        <!-- Replace the initials below with: <img src="ABC-logo.jpg" alt="ABC Logo"> -->
+        <img src="ABC-logo.jpg" alt="ABC Logo">
+      </div>
+      <div class="nav-wordmark">
+        Appalachian
+        <span>Bowhunter Challenge</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Recaps</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="register.html" class="nav-cta">Register Now</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══════════════════════════════════
+       HERO
+  ══════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Appalachian Bowhunter Challenge</div>
+      <h1 class="hero-title">Creating Higher <em>Ground.</em></h1>
+      <p class="hero-sub">Three stages. One mountain. A competition built around the complete hunter — not just the shot.</p>
+      <div class="hero-actions">
+        <a href="register.html" class="btn-primary">Register for 2027</a>
+        <a href="about.html" class="btn-secondary">Learn more <span class="btn-arrow">→</span></a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <strong>Spring 2027</strong>
+          Next Event
+        </div>
+        <div class="hero-meta-item">
+          <strong>Winterplace Ski Resort</strong>
+          West Virginia
+        </div>
+        <div class="hero-meta-item">
+          <strong>3 Stages</strong>
+          No Shortcuts
+        </div>
+        <div class="hero-meta-item">
+          <strong>50 Competitors</strong>
+          2026 Field
+        </div>
+      </div>
+    </div>
+    <div class="hero-rule">Appalachian Bowhunter Challenge · Est. 2026</div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       WHAT IS ABC
+  ══════════════════════════════════ -->
+  <div class="section reveal">
+    <div class="section-label"><h2>What Is the ABC</h2></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Built Around the <em>Whole</em> Hunter</h3>
+        <p>There's a certain kind of weekend that sneaks up on you. You show up expecting a contest — targets, scorecards, a podium — and somewhere between the first arrow and the last campfire laugh, it becomes something else entirely.</p>
+        <p>The Appalachian Bowhunter Challenge was designed to test more than your shot. It tests the body that carries the bow, the mind that holds steady under pressure, and the character that shows up when the mountain takes something from you.</p>
+        <p>Three stages. No shortcuts. No skipping the hard parts.</p>
+        <a href="about.html" class="read-more">Read the full story →</a>
+      </div>
+      <div class="about-visual">
+        <div class="about-photo">
+          <img src="0M9A0858.jpg" alt="Competitor at full draw">
+        </div>
+        <div class="about-stat-row">
+          <div class="about-stat">
+            <span class="about-stat-number">50</span>
+            <span class="about-stat-label">Competitors</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">3</span>
+            <span class="about-stat-label">Stages</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">1K<span style="font-size:1.4rem">ft</span></span>
+            <span class="about-stat-label">Elevation Gain</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">1st</span>
+            <span class="about-stat-label">Its Kind</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       THREE STAGES
+  ══════════════════════════════════ -->
+  <div class="stages-section">
+    <div class="section reveal">
+      <div class="section-label"><h2>The Competition</h2></div>
+      <div class="stages-intro">
+        <h3>Three Stages.<br>No Shortcuts.</h3>
+        <p>Every element of this competition was designed to mirror the demands of a real backcountry hunt. The mountain doesn't care about your range score. The animals don't care how fast you think you can run. </p>
+      </div>
+      <div class="stages-grid">
+        <div class="stage-card">
+          <div class="stage-number">01</div>
+          <span class="stage-icon">🏋️</span>
+          <h4>5K Weighted Pack Race</h4>
+          <p>Competitors strap on weighted packs and cover five kilometers and nearly 1,000 feet of elevation gain. If you can't get past the gravel parking lot, the rest doesn't matter.</p>
+          <span class="stage-tag">Fitness · Endurance</span>
+        </div>
+        <div class="stage-card">
+          <div class="stage-number">02</div>
+          <span class="stage-icon">🎯</span>
+          <h4>3D Course Shoot</h4>
+          <p>A winding layout through mountain terrain. No rangefinders. Read the distance with your eyes, manage the angles, and make the shot — with everything already burning.</p>
+          <span class="stage-tag">Skill · Precision</span>
+        </div>
+        <div class="stage-card">
+          <div class="stage-number">03</div>
+          <span class="stage-icon">🏹</span>
+          <h4>Head-to-Head Bracket</h4>
+          <p>March Madness style. Sandbags. Sled drags. One-on-one eliminations. Then step up and make the shot — breathing hard, muscles torched, heart rate through the roof.</p>
+          <span class="stage-tag">Composure · Character</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PULL QUOTE
+  ══════════════════════════════════ -->
+  <div class="quote-section">
+    <div class="section reveal">
+      <p class="pull-quote-text">These guys are as hardcore as it gets. They're obsessed just like I'm obsessed. It's nice to be able to reach out to somebody else that's as obsessed as you.</p>
+      <div class="pull-quote-attribution">— <span>Lucas Geiman</span>, 2026 Competitor</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       LATEST RECAP
+  ══════════════════════════════════ -->
+  <div class="section reveal">
+    <div class="section-label"><h2>From the Field</h2></div>
+    <div class="recap-grid">
+      <a href="blog-2026-recap.html" class="recap-featured">
+        <div class="recap-featured-photo">
+          <!-- Replace with: <img src="recap-hero.jpg" alt="2026 ABC Recap"> -->
+          <div class="recap-featured-photo-placeholder">
+            <span>📷</span>
+            Event Photo Here
+          </div>
+        </div>
+        <div class="recap-tag">2026 Event Recap</div>
+        <h3 class="recap-featured-title">Higher <em>Ground</em> — Inside the Inaugural Appalachian Bowhunter Challenge</h3>
+        <p class="recap-featured-excerpt">Nobody mailed it in after a rough segment. Nobody made excuses when the mountain took something from them. What unfolded over two days at Winterplace was something rarer than a good score — it was a room full of people who genuinely wanted to be better.</p>
+        <span class="recap-read-link">Read the full recap →</span>
+      </a>
+
+      <div class="recap-sidebar">
+        <div class="section-label" style="margin-bottom:1rem;"><h2>More Posts</h2></div>
+
+        <a href="#" class="recap-sidebar-item">
+          <div class="recap-sidebar-thumb">
+            <!-- <img src="thumb.jpg" alt=""> -->
+            <div class="recap-sidebar-thumb-placeholder">📷</div>
+          </div>
+          <div class="recap-sidebar-info">
+            <div class="recap-sidebar-date">Training · 2026</div>
+            <div class="recap-sidebar-title">How to Train for the ABC Pack Race</div>
+          </div>
+        </a>
+
+        <a href="#" class="recap-sidebar-item">
+          <div class="recap-sidebar-thumb">
+            <div class="recap-sidebar-thumb-placeholder">📷</div>
+          </div>
+          <div class="recap-sidebar-info">
+            <div class="recap-sidebar-date">Results · 2026</div>
+            <div class="recap-sidebar-title">2026 Final Results & Division Winners</div>
+          </div>
+        </a>
+
+        <a href="#" class="recap-sidebar-item">
+          <div class="recap-sidebar-thumb">
+            <div class="recap-sidebar-thumb-placeholder">📷</div>
+          </div>
+          <div class="recap-sidebar-info">
+            <div class="recap-sidebar-date">Gear · 2026</div>
+            <div class="recap-sidebar-title">What Competitors Carried: Gear from the Field</div>
+          </div>
+        </a>
+
+        <a href="blog.html" class="recap-all-link">View all posts →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SPONSORS STRIP
+  ══════════════════════════════════ -->
+  <div class="sponsors-strip reveal">
+    <div class="sponsors-strip-inner">
+      <div class="sponsors-label">2026 Sponsors</div>
+      <div class="sponsors-logos">
+        <!-- Replace text with <img src="logo.png"> inside each pill -->
+        <a href="sponsors.html" class="sponsor-logo-pill">MTN Tough</a>
+        <a href="sponsors.html" class="sponsor-logo-pill">The Archer's Edge</a>
+        <a href="sponsors.html" class="sponsor-logo-pill">Flying Squirrel Forge</a>
+        <a href="sponsors.html" class="sponsor-logo-pill">Tecumseh Taxidermy</a>
+        <a href="sponsors.html" class="sponsor-logo-pill">View All Sponsors →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       REGISTER CTA
+  ══════════════════════════════════ -->
+  <div class="section register-cta reveal">
+    <div class="register-cta-inner">
+      <h3>Are You <span>Ready</span> for the Mountain?</h3>
+      <p>Registration for the 2027 Appalachian Bowhunter Challenge opens soon. Spots are limited — get on the list before they're gone.</p>
+      <a href="register.html" class="btn-primary">Register via RunReg</a>
+      <div class="register-meta">
+        <div class="register-meta-item">
+          <strong>Spring 2027</strong>
+          Event Date
+        </div>
+        <div class="register-meta-item">
+          <strong>Winterplace Ski Resort</strong>
+          West Virginia
+        </div>
+        <div class="register-meta-item">
+          <strong>Limited Spots</strong>
+          Register Early
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Appalachian <em>Bowhunter</em> Challenge</div>
+        <div class="footer-tagline">Three Stages · No Shortcuts · West Virginia</div>
+        <p>A competition built around the complete bowhunter — testing fitness, technical skill, and composure under pressure at Winterplace Ski Resort.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="about.html">About the Event</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Recaps &amp; Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="register.html">2027 Registration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Location</h5>
+        <ul>
+          <li><a href="#">Winterplace Ski Resort</a></li>
+          <li><a href="#">Ghent, West Virginia</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Appalachian Bowhunter Challenge · All rights reserved</div>
+      <div class="footer-copy">Site by ABC</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+
+    // Nav background on scroll
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(5,11,44,0.98)'
+        : 'rgba(5,11,44,0.88)';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register · Appalachian Bowhunter Challenge</title>
+  <meta name="description" content="Register for the Appalachian Bowhunter Challenge through RunReg. Spots are limited."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --midnight:#050b2c;--navy:#0d1f5c;--ridge:#234f93;--mountain:#3f6cab;
+      --skyline:#6c86b7;--topo-orange:#ff8a00;--gold:#ffb400;--sunlight:#ffc93d;
+      --ice:#f7f7f7;--parchment:#e7edf8;--fog:#d6dbe7;--smoke:#94a3c4;
+      --amber:var(--topo-orange);--cream:var(--ice);--bark:var(--midnight);--sage:var(--skyline);
+    }
+    html{scroll-behavior:smooth;}
+    body{background-color:var(--bark);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;font-size:17px;line-height:1.85;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,180,0,0.3);}50%{box-shadow:0 0 0 10px rgba(255,180,0,0);}}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.5rem,5vw,4rem);background:rgba(5,11,44,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,180,0,0.1);}
+    .nav-logo{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .nav-logo-img{width:44px;height:44px;border-radius:50%;background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--gold);overflow:hidden;}
+    .nav-logo-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .nav-wordmark{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);line-height:1.2;}
+    .nav-wordmark span{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);font-weight:400;}
+    .nav-links{display:flex;align-items:center;gap:0.2rem;list-style:none;}
+    .nav-links a{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);text-decoration:none;padding:0.5rem 0.85rem;border-radius:2px;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--cream);}
+    .nav-links a.active{color:var(--gold);}
+    .nav-cta{color:var(--midnight)!important;background:var(--gold)!important;font-weight:600!important;}
+    .nav-cta:hover{background:var(--sunlight)!important;}
+    @media(max-width:860px){.nav-links{display:none;}}
+
+    /* HERO */
+    .hero{
+      position:relative;min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+      padding:0 clamp(1.5rem,6vw,8rem) clamp(4rem,7vh,6rem);
+      background-image:
+        radial-gradient(ellipse at top right,rgba(255,138,0,0.32) 5%,transparent 52%),
+        radial-gradient(ellipse at bottom left,rgba(63,108,171,0.25) 0%,transparent 50%),
+        linear-gradient(180deg,#132d72 0%,#0d1f5c 38%,#081238 72%,#050b2c 100%);
+    }
+    .hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.012) 2px,rgba(255,255,255,0.012) 4px);pointer-events:none;}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent,var(--midnight));pointer-events:none;}
+    .hero-content{position:relative;z-index:1;max-width:1200px;width:100%;}
+    .hero-eyebrow{font-family:'Oswald',sans-serif;font-size:clamp(0.7rem,1.5vw,0.85rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem;animation:fadeUp 0.8s ease 0.2s both;}
+    .hero-eyebrow::before{content:'';display:inline-block;width:24px;height:1.5px;background:var(--gold);flex-shrink:0;}
+    .hero-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3rem,8vw,7rem);line-height:0.93;color:var(--cream);animation:fadeUp 0.9s ease 0.35s both;}
+    .hero-title em{font-style:italic;color:var(--gold);}
+    .hero-sub{margin-top:1.8rem;font-size:clamp(1rem,2vw,1.15rem);color:var(--smoke);max-width:50ch;animation:fadeUp 0.9s ease 0.55s both;}
+    .hero-meta{margin-top:2.8rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:2.5rem;flex-wrap:wrap;animation:fadeUp 0.9s ease 0.75s both;}
+    .hero-meta-item{font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);}
+    .hero-meta-item strong{display:block;color:var(--cream);font-size:0.85rem;margin-bottom:0.1rem;}
+
+    /* MAIN LAYOUT */
+    .wrap{max-width:1200px;margin:0 auto;padding:5rem clamp(1.5rem,5vw,4rem) 7rem;display:grid;grid-template-columns:1fr 360px;gap:5rem;align-items:start;}
+    @media(max-width:960px){.wrap{grid-template-columns:1fr;gap:4rem;}}
+
+    .section-label{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;}
+    .section-label::before{content:'';flex:0 0 36px;height:2px;background:var(--amber);}
+    .section-label h2{font-family:'Oswald',sans-serif;font-size:clamp(0.72rem,1.8vw,0.88rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--amber);font-weight:600;}
+
+    /* RUNREG BLOCK */
+    .runreg-block{
+      padding:clamp(2rem,4vw,3.5rem);
+      background:linear-gradient(135deg,rgba(255,138,0,0.14) 0%,rgba(13,31,92,0.6) 60%,rgba(5,11,44,0.9) 100%);
+      border:1px solid rgba(255,180,0,0.28);
+      border-radius:4px;
+      margin-bottom:3rem;
+      position:relative;
+      overflow:hidden;
+    }
+    .runreg-block::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--amber),var(--gold),var(--sunlight));
+    }
+    .runreg-logo-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+    .runreg-badge{
+      font-family:'Oswald',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+      background:var(--gold);color:var(--midnight);padding:0.35rem 0.8rem;border-radius:2px;flex-shrink:0;
+    }
+    .runreg-label{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--smoke);}
+    .runreg-block h3{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--cream);margin-bottom:0.8rem;}
+    .runreg-block h3 em{font-style:italic;color:var(--gold);}
+    .runreg-block p{color:var(--parchment);font-size:0.96rem;line-height:1.8;margin-bottom:1.8rem;max-width:56ch;}
+
+    .runreg-btn{
+      display:inline-flex;align-items:center;gap:0.8rem;
+      font-family:'Oswald',sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;
+      color:var(--midnight);background:var(--gold);
+      padding:1.1rem 2.5rem;border-radius:2px;text-decoration:none;
+      transition:background 0.2s,transform 0.15s;
+      animation:pulse 2.5s ease-in-out infinite;
+    }
+    .runreg-btn:hover{background:var(--sunlight);transform:translateY(-2px);animation:none;}
+    .runreg-btn-arrow{font-size:1.1rem;transition:transform 0.2s;}
+    .runreg-btn:hover .runreg-btn-arrow{transform:translateX(4px);}
+
+    .runreg-note{margin-top:1rem;font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--smoke);}
+    .runreg-note a{color:rgba(255,180,0,0.5);text-decoration:none;transition:color 0.2s;}
+    .runreg-note a:hover{color:var(--gold);}
+
+    /* EMBED PLACEHOLDER */
+    .runreg-embed-placeholder{
+      margin-top:2rem;padding:2rem;
+      border:2px dashed rgba(255,180,0,0.18);border-radius:2px;
+      background:rgba(255,255,255,0.02);
+      font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;
+      color:rgba(228,168,74,0.35);text-align:center;line-height:2;
+    }
+    .runreg-embed-placeholder code{display:block;margin-top:0.5rem;font-size:0.8rem;color:rgba(228,168,74,0.5);font-family:'Courier New',monospace;letter-spacing:0;text-transform:none;}
+
+    /* DIVISIONS */
+    .divisions-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.1);margin-bottom:3rem;}
+    .division-card{background:var(--midnight);padding:1.6rem 1.5rem;transition:background 0.2s;}
+    .division-card:hover{background:rgba(13,31,92,0.6);}
+    .division-name{font-family:'Oswald',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem;}
+    .division-desc{font-size:0.82rem;color:var(--smoke);line-height:1.55;}
+    @media(max-width:560px){.divisions-grid{grid-template-columns:1fr;}}
+
+    /* WHAT TO EXPECT */
+    .expect-list{display:flex;flex-direction:column;gap:0;margin-bottom:3rem;}
+    .expect-item{display:flex;gap:2rem;padding:1.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);align-items:flex-start;}
+    .expect-item:first-child{border-top:1px solid rgba(255,255,255,0.05);}
+    .expect-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--amber);opacity:0.15;line-height:1;flex-shrink:0;min-width:3.5rem;text-align:right;margin-top:-0.3rem;}
+    .expect-content h4{font-family:'Oswald',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream);margin-bottom:0.4rem;}
+    .expect-content p{font-size:0.88rem;color:var(--smoke);line-height:1.65;margin:0;}
+
+    /* SIDEBAR */
+    .sidebar{position:sticky;top:6rem;display:flex;flex-direction:column;gap:1.5rem;}
+
+    .sidebar-card{background:rgba(13,31,92,0.4);border:1px solid rgba(255,180,0,0.14);padding:1.8rem 1.6rem;border-radius:2px;}
+    .sidebar-card-title{font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6rem;}
+    .sidebar-card-title::after{content:'';flex:1;height:1px;background:rgba(255,138,0,0.15);}
+
+    .detail-list{display:flex;flex-direction:column;gap:0;}
+    .detail-row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .detail-row:last-child{border-bottom:none;padding-bottom:0;}
+    .detail-key{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);flex-shrink:0;}
+    .detail-val{font-family:'Oswald',sans-serif;font-size:0.78rem;letter-spacing:0.06em;color:var(--cream);text-align:right;}
+    .detail-val.gold{color:var(--gold);}
+
+    .checklist{display:flex;flex-direction:column;gap:0.5rem;}
+    .check-item{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--parchment);line-height:1.5;}
+    .check-icon{flex-shrink:0;color:var(--gold);font-size:0.8rem;margin-top:0.18rem;}
+
+    .prizes-list{display:flex;flex-direction:column;gap:0;}
+    .prize-row{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);align-items:flex-start;}
+    .prize-row:last-child{border-bottom:none;padding-bottom:0;}
+    .prize-place{font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;flex-shrink:0;width:48px;color:var(--smoke);margin-top:0.15rem;}
+    .prize-row.first .prize-place{color:var(--gold);}
+    .prize-row.second .prize-place{color:var(--fog);}
+    .prize-row.third .prize-place{color:var(--amber);}
+    .prize-desc{font-size:0.82rem;color:var(--parchment);line-height:1.5;}
+    .prize-desc strong{display:block;color:var(--cream);font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:0.06em;margin-bottom:0.1rem;}
+
+    .sidebar-cta-btn{display:block;text-align:center;font-family:'Oswald',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--midnight);background:var(--gold);padding:0.9rem;border-radius:2px;text-decoration:none;transition:background 0.2s;margin-top:0.5rem;}
+    .sidebar-cta-btn:hover{background:var(--sunlight);}
+
+    /* FAQ */
+    .faq-list{display:flex;flex-direction:column;gap:0;margin-bottom:3rem;}
+    .faq-item{border-bottom:1px solid rgba(255,255,255,0.05);}
+    .faq-item:first-child{border-top:1px solid rgba(255,255,255,0.05);}
+    .faq-q{font-family:'Oswald',sans-serif;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream);padding:1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:0.5rem;transition:color 0.2s;user-select:none;}
+    .faq-q:hover,.faq-item.open .faq-q{color:var(--gold);}
+    .faq-arrow{font-size:0.8rem;color:var(--smoke);transition:transform 0.25s;flex-shrink:0;}
+    .faq-item.open .faq-arrow{transform:rotate(180deg);}
+    .faq-a{font-size:0.88rem;color:var(--smoke);line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.3s;}
+    .faq-item.open .faq-a{max-height:240px;padding-bottom:1rem;}
+
+    /* CLOSING BANNER */
+    .closing{
+      margin-top:5rem;padding:clamp(2.5rem,5vw,4rem);text-align:center;
+      background:linear-gradient(135deg,rgba(35,79,147,0.30) 0%,rgba(5,11,44,0.9) 100%);
+      border:1px solid rgba(255,180,0,0.18);
+    }
+    .closing h3{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;font-style:italic;color:var(--gold);margin-bottom:0.8rem;}
+    .closing p{color:var(--smoke);font-size:0.96rem;max-width:48ch;margin:0 auto 2rem;}
+    .closing-btn{display:inline-block;font-family:'Oswald',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--midnight);background:var(--gold);padding:1rem 2.4rem;border-radius:2px;text-decoration:none;transition:background 0.2s;}
+    .closing-btn:hover{background:var(--sunlight);}
+
+    /* FOOTER */
+    .footer{background:rgba(3,7,24,0.95);border-top:1px solid rgba(255,255,255,0.05);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:2rem clamp(1.5rem,5vw,4rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(148,163,196,0.35);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(148,163,196,0.35);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--gold);}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-img">ABC</div>
+      <div class="nav-wordmark">Appalachian<span>Bowhunter Challenge</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="register.html" class="active">Register</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Recaps</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="register.html" class="nav-cta">Register Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">2027 Registration</div>
+      <h1 class="hero-title">Earn Your <em>Spot.</em></h1>
+      <p class="hero-sub">Registration for the 2027 Appalachian Bowhunter Challenge is handled through RunReg. Spots are limited — don't wait.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>Spring 2027</strong>Event Date</div>
+        <div class="hero-meta-item"><strong>Winterplace Ski Resort</strong>Ghent, West Virginia</div>
+        <div class="hero-meta-item"><strong>Limited Spots</strong>Register Early</div>
+        <div class="hero-meta-item"><strong>3 Stages</strong>Fitness · 3D · Bracket</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <!-- MAIN COLUMN -->
+    <main>
+
+      <!-- RUNREG BLOCK -->
+      <div class="reveal">
+        <div class="section-label"><h2>Register via RunReg</h2></div>
+        <div class="runreg-block">
+          <div class="runreg-logo-row">
+            <div class="runreg-badge">Official Platform</div>
+            <div class="runreg-label">Registration powered by RunReg</div>
+          </div>
+          <h3>Ready for the <em>Mountain?</em></h3>
+          <p>All registration for the Appalachian Bowhunter Challenge is handled through RunReg — our official event registration platform. Click below to view open spots, select your division, and complete your entry.</p>
+          <!-- ══════════════════════════════════════════════
+               WORDPRESS NOTE: Replace the href below with
+               your actual RunReg event URL.
+               Example: https://www.runreg.com/your-event
+          ══════════════════════════════════════════════ -->
+          <a href="https://www.runreg.com" target="_blank" rel="noopener" class="runreg-btn">
+            Register on RunReg <span class="runreg-btn-arrow">→</span>
+          </a>
+          <div class="runreg-note">
+            New to RunReg? <a href="https://www.runreg.com" target="_blank" rel="noopener">Create a free account</a> before registering to save time at checkout.
+          </div>
+
+          <!-- OPTIONAL: Embed RunReg widget if they provide an iframe -->
+          <div class="runreg-embed-placeholder">
+            Optional: Paste your RunReg embed iframe here if available
+            <code>&lt;iframe src="https://www.runreg.com/embed/your-event" width="100%" height="600"&gt;&lt;/iframe&gt;</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVISIONS -->
+      <div class="reveal">
+        <div class="section-label"><h2>Competition Divisions</h2></div>
+        <div class="divisions-grid">
+          <div class="division-card">
+            <div class="division-name">Men's Open (40 &amp; Under)</div>
+            <div class="division-desc">Any bow style. Competitors 40 years old and under at time of event.</div>
+          </div>
+          <div class="division-card">
+            <div class="division-name">Men's Open (41 &amp; Over)</div>
+            <div class="division-desc">Any bow style. Competitors 41 years old and over at time of event.</div>
+          </div>
+          <div class="division-card">
+            <div class="division-name">Women's Open</div>
+            <div class="division-desc">Any bow style. Open to all female competitors regardless of age.</div>
+          </div>
+          <div class="division-card">
+            <div class="division-name">Traditional</div>
+            <div class="division-desc">Longbow and recurve only. No compound equipment permitted.</div>
+          </div>
+          <div class="division-card">
+            <div class="division-name">Crossbow</div>
+            <div class="division-desc">Crossbow division. All legal crossbow configurations welcome.</div>
+          </div>
+          <div class="division-card">
+            <div class="division-name">Youth (Under 18)</div>
+            <div class="division-desc">Open to competitors under 18 years of age. Any bow style.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT TO EXPECT -->
+      <div class="reveal">
+        <div class="section-label"><h2>What to Expect</h2></div>
+        <div class="expect-list">
+          <div class="expect-item">
+            <div class="expect-num">01</div>
+            <div class="expect-content">
+              <h4>5K Weighted Pack Race</h4>
+              <p>Strap on a loaded pack and cover five kilometers of mountain terrain, gaining nearly 1,000 feet of elevation. Your pack race time feeds directly into your overall score — so show up fit.</p>
+            </div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">02</div>
+            <div class="expect-content">
+              <h4>3D Archery Course</h4>
+              <p>A winding course through Winterplace's terrain. No rangefinders — read the distance with your eyes. Twelve targets, varied angles, and your legs still burning from Stage 1.</p>
+            </div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">03</div>
+            <div class="expect-content">
+              <h4>Head-to-Head Bracket</h4>
+              <p>March Madness-style single elimination. Before each shot you'll complete a fitness challenge — sandbag carries, sled drags — then step up and make the arrow count. One bad shot ends your run.</p>
+            </div>
+          </div>
+          <div class="expect-item">
+            <div class="expect-num">04</div>
+            <div class="expect-content">
+              <h4>Awards &amp; Ceremony</h4>
+              <p>Division winners and the Overall Grand Champion are recognized at the awards ceremony. Prizes from Mathews Archery, Flying Squirrel Forge, Tecumseh Taxidermy, and more.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="reveal">
+        <div class="section-label"><h2>Registration FAQ</h2></div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What does registration include? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Your entry fee covers all three stages of competition, a competitor packet, access to the awards ceremony, and — thanks to our sponsors — a full-year MTN TOUGH fitness platform membership for every registered competitor.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How many spots are available? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">The field is intentionally kept small to maintain the quality of competition and the camaraderie that makes this event what it is. The 2026 event had 50 competitors. Expect similar numbers in 2027 — register early.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What bow equipment is allowed? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Any legal hunting bow is welcome. Compound, traditional (longbow/recurve), and crossbow all have dedicated divisions. Rangefinders are not permitted on the 3D course — this is intentional. The course is designed to be shot by eye.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What weight is required for the pack race? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Pack weight requirements will be specified in your competitor packet and confirmed via RunReg closer to the event. Weight requirements may vary by division. Youth competitors will have an adjusted weight standard.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Is there lodging at Winterplace? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Yes — Winterplace Ski Resort has on-site lodging options. We recommend booking early as availability fills up. Details and a lodging discount code will be included in your confirmation email after registering through RunReg.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What is the refund / cancellation policy? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Refund and cancellation policies are managed through RunReg. Please review their policy at the time of registration. If you have extenuating circumstances, reach out to us via the Contact page and we'll do our best to work with you.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">I have a question not answered here. <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Use our Contact page — select "Registration" as your topic and we'll get back to you within 48 hours. We read everything.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CLOSING -->
+      <div class="closing reveal">
+        <h3>The Mountain Is Waiting.</h3>
+        <p>50 spots. Three stages. One weekend that will change how you think about what you're capable of.</p>
+        <a href="https://www.runreg.com" target="_blank" rel="noopener" class="closing-btn">Register on RunReg →</a>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-card reveal">
+        <div class="sidebar-card-title">Event Details</div>
+        <div class="detail-list">
+          <div class="detail-row">
+            <span class="detail-key">Date</span>
+            <span class="detail-val gold">Spring 2027</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Location</span>
+            <span class="detail-val">Winterplace Ski Resort</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">City / State</span>
+            <span class="detail-val">Ghent, West Virginia</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Field Size</span>
+            <span class="detail-val">Limited Spots</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Format</span>
+            <span class="detail-val">3-Stage Competition</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Platform</span>
+            <span class="detail-val gold">RunReg</span>
+          </div>
+        </div>
+        <a href="https://www.runreg.com" target="_blank" rel="noopener" class="sidebar-cta-btn">Register Now on RunReg →</a>
+      </div>
+
+      <div class="sidebar-card reveal">
+        <div class="sidebar-card-title">2026 Prizes</div>
+        <div class="prizes-list">
+          <div class="prize-row first">
+            <div class="prize-place">1st</div>
+            <div class="prize-desc"><strong>Mathews ARC Bow</strong>Overall Grand Champion · Provided by Mathews Archery</div>
+          </div>
+          <div class="prize-row first">
+            <div class="prize-place">1st</div>
+            <div class="prize-desc"><strong>Shoulder Mount Voucher</strong>Overall Grand Champion · Provided by Tecumseh Taxidermy</div>
+          </div>
+          <div class="prize-row second">
+            <div class="prize-place">Top 3</div>
+            <div class="prize-desc"><strong>Custom Hunting Knife</strong>Podium finishers · Provided by Flying Squirrel Forge</div>
+          </div>
+          <div class="prize-row third">
+            <div class="prize-place">All</div>
+            <div class="prize-desc"><strong>MTN TOUGH Membership</strong>Every competitor · Full-year access</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--smoke);line-height:1.6;">2027 prizes to be announced. Follow us for updates.</div>
+      </div>
+
+      <div class="sidebar-card reveal">
+        <div class="sidebar-card-title">Competitor Checklist</div>
+        <div class="checklist">
+          <div class="check-item"><span class="check-icon">✓</span>Register through RunReg</div>
+          <div class="check-item"><span class="check-icon">✓</span>Book lodging at Winterplace early</div>
+          <div class="check-item"><span class="check-icon">✓</span>Start your pack race training now</div>
+          <div class="check-item"><span class="check-icon">✓</span>Practice shooting at elevated heart rate</div>
+          <div class="check-item"><span class="check-icon">✓</span>Practice judging distance by eye — no rangefinder</div>
+          <div class="check-item"><span class="check-icon">✓</span>Review the format on the About page</div>
+          <div class="check-item"><span class="check-icon">✓</span>Questions? Use the Contact page</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card reveal" style="background:rgba(255,138,0,0.07);border-color:rgba(255,138,0,0.25);">
+        <div class="sidebar-card-title">Questions?</div>
+        <p style="font-size:0.88rem;color:var(--smoke);line-height:1.65;margin-bottom:1rem;">Not finding what you need? Our contact form is the fastest way to reach us.</p>
+        <a href="contact.html" style="display:block;text-align:center;font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(255,138,0,0.35);padding:0.75rem;border-radius:2px;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,138,0,0.1)'" onmouseout="this.style.background='transparent'">Contact Us →</a>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Appalachian Bowhunter Challenge · Registration via RunReg</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="sponsors.html">Sponsors</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+    },{threshold:0.06});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    function toggleFaq(el){
+      const item=el.closest('.faq-item');
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    }
+  </script>
+</body>
+</html>

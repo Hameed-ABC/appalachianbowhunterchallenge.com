@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sponsors · Appalachian Bowhunter Challenge</title>
+  <meta name="description" content="The brands and businesses who make the Appalachian Bowhunter Challenge possible."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --midnight:#050b2c;--navy:#0d1f5c;--ridge:#234f93;--mountain:#3f6cab;
+      --skyline:#6c86b7;--topo-orange:#ff8a00;--gold:#ffb400;--sunlight:#ffc93d;
+      --ice:#f7f7f7;--parchment:#e7edf8;--fog:#d6dbe7;--smoke:#94a3c4;
+      --amber:var(--topo-orange);--cream:var(--ice);--bark:var(--midnight);--sage:var(--skyline);
+    }
+    html{scroll-behavior:smooth;}
+    body{background-color:var(--bark);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;font-size:17px;line-height:1.85;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.5rem,5vw,4rem);background:rgba(5,11,44,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,180,0,0.1);}
+    .nav-logo{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .nav-logo-img{width:44px;height:44px;border-radius:50%;background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--gold);overflow:hidden;}
+    .nav-logo-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .nav-wordmark{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);line-height:1.2;}
+    .nav-wordmark span{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);font-weight:400;}
+    .nav-links{display:flex;align-items:center;gap:0.2rem;list-style:none;}
+    .nav-links a{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);text-decoration:none;padding:0.5rem 0.85rem;border-radius:2px;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--cream);}
+    .nav-links a.active{color:var(--gold);}
+    .nav-cta{color:var(--midnight)!important;background:var(--gold)!important;font-weight:600!important;}
+    .nav-cta:hover{background:var(--sunlight)!important;}
+    @media(max-width:860px){.nav-links{display:none;}}
+
+    /* PAGE HEADER */
+    .page-header{padding:10rem clamp(1.5rem,6vw,8rem) 4rem;position:relative;overflow:hidden;background-image:radial-gradient(ellipse at top right,rgba(255,138,0,0.20) 5%,transparent 50%),radial-gradient(ellipse at bottom left,rgba(63,108,171,0.18) 0%,transparent 50%),linear-gradient(180deg,#132d72 0%,#0d1f5c 40%,#050b2c 100%);border-bottom:1px solid rgba(255,180,0,0.08);}
+    .page-header::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.01) 2px,rgba(255,255,255,0.01) 4px);pointer-events:none;}
+    .page-header-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+    .page-eyebrow{font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;animation:fadeUp 0.7s ease 0.1s both;}
+    .page-eyebrow::before{content:'';display:inline-block;width:24px;height:1.5px;background:var(--gold);flex-shrink:0;}
+    .page-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.8rem,7vw,6rem);line-height:0.95;color:var(--cream);animation:fadeUp 0.8s ease 0.25s both;}
+    .page-title em{font-style:italic;color:var(--gold);}
+    .page-sub{margin-top:1.5rem;font-size:1rem;color:var(--smoke);max-width:52ch;animation:fadeUp 0.8s ease 0.4s both;}
+
+    /* WRAP */
+    .wrap{max-width:1200px;margin:0 auto;padding:5rem clamp(1.5rem,5vw,4rem) 7rem;}
+
+    .section-label{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
+    .section-label::before{content:'';flex:0 0 36px;height:2px;background:var(--amber);}
+    .section-label h2{font-family:'Oswald',sans-serif;font-size:clamp(0.72rem,1.8vw,0.88rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--amber);font-weight:600;}
+
+    /* FEATURED SPONSOR */
+    .featured-sponsor{
+      margin-bottom:5rem;padding:clamp(2.5rem,4vw,4.5rem);
+      background:linear-gradient(135deg,#ff8a00 0%,#c76600 15%,#0d1f5c 90%);
+      border:1px solid rgba(255,180,0,0.22);border-radius:10px;
+      box-shadow:0 0 0 1px rgba(255,180,0,0.08),0 20px 60px rgba(0,0,0,0.45);
+      position:relative;overflow:hidden;
+    }
+    .featured-sponsor-eyebrow{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;position:relative;z-index:1;}
+    .featured-sponsor-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:3.5rem;align-items:center;position:relative;z-index:1;}
+    .featured-sponsor-content h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);line-height:0.95;color:var(--cream);margin-bottom:0.6rem;}
+    .featured-sponsor-lead{font-family:'Oswald',sans-serif;font-size:0.88rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;}
+    .featured-sponsor-content p{color:var(--parchment);font-size:0.96rem;line-height:1.8;margin-bottom:1rem;}
+    .featured-sponsor-content a{color:var(--gold);text-decoration:none;font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;}
+    .featured-sponsor-content a:hover{color:var(--sunlight);}
+    .featured-sponsor-stat{margin-top:1.25rem;padding:1rem 1.2rem;background:rgba(255,255,255,0.06);border-left:3px solid var(--amber);font-family:'Oswald',sans-serif;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--fog);line-height:1.7;}
+    .featured-sponsor-stat span{display:block;font-size:2rem;line-height:1;color:var(--gold);margin-bottom:0.35rem;}
+    .featured-sponsor-logo-box{width:100%;aspect-ratio:1/1;background:rgba(255,255,255,0.06);border:1px dashed rgba(255,180,0,0.22);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,180,0,0.4);overflow:hidden;}
+    .featured-sponsor-logo-box img{width:100%;height:100%;object-fit:contain;padding:1.5rem;}
+    @media(max-width:800px){.featured-sponsor-grid{grid-template-columns:1fr;gap:2rem;} .featured-sponsor-logo-box{aspect-ratio:16/8;}}
+
+    /* TIER SECTIONS */
+    .tier-intro{max-width:640px;margin-bottom:2.5rem;}
+    .tier-intro p{color:var(--smoke);font-size:0.96rem;line-height:1.75;}
+
+    /* GOLD TIER */
+    .gold-tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-bottom:5rem;}
+    .gold-card{background:rgba(255,180,0,0.06);border:1px solid rgba(255,180,0,0.25);padding:2rem 1.8rem;border-radius:2px;display:flex;flex-direction:column;gap:0.6rem;transition:border-color 0.2s,background 0.2s;}
+    .gold-card:hover{background:rgba(255,180,0,0.1);border-color:rgba(255,180,0,0.4);}
+    .gold-card-logo{width:100%;height:120px;background:rgba(255,255,255,0.04);border:1px dashed rgba(228,168,74,0.2);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:0.6rem;overflow:hidden;}
+    .gold-card-logo img{width:100%;height:100%;object-fit:contain;padding:8px;}
+    .gold-card-logo-ph{font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(228,168,74,0.3);}
+    .gold-card h3{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);}
+    .gold-card p{font-size:0.85rem;color:var(--smoke);line-height:1.6;margin:0;}
+    .gold-card a{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,180,0,0.5);text-decoration:none;transition:color 0.2s;margin-top:auto;}
+    .gold-card a:hover{color:var(--gold);}
+
+    /* SUPPORTING TIER */
+    .support-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:5rem;}
+    .support-card{background:rgba(13,31,92,0.45);border:1px solid rgba(255,180,0,0.14);padding:1.6rem 1.4rem;border-radius:2px;display:flex;flex-direction:column;gap:0.4rem;transition:border-color 0.2s;}
+    .support-card:hover{border-color:rgba(255,180,0,0.28);}
+    .support-card-logo{width:100%;height:90px;background:rgba(255,255,255,0.03);border:1px dashed rgba(228,168,74,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:0.4rem;overflow:hidden;}
+    .support-card-logo img{width:100%;height:100%;object-fit:contain;padding:6px;}
+    .support-card-logo-ph{font-family:'Oswald',sans-serif;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(228,168,74,0.25);}
+    .support-card h4{font-family:'Oswald',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);}
+    .support-card p{font-size:0.8rem;color:var(--smoke);line-height:1.55;margin:0;}
+
+    /* BECOME A SPONSOR CTA */
+    .become-sponsor{
+      padding:clamp(2.5rem,5vw,4rem);
+      background:linear-gradient(135deg,rgba(35,79,147,0.30) 0%,rgba(5,11,44,0.85) 100%);
+      border:1px solid rgba(255,180,0,0.18);
+      display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;
+    }
+    .become-sponsor h3{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700;font-style:italic;color:var(--cream);margin-bottom:0.8rem;}
+    .become-sponsor p{color:var(--smoke);font-size:0.96rem;line-height:1.75;max-width:52ch;}
+    .become-sponsor-action{flex-shrink:0;text-align:center;}
+    .become-sponsor-action a{display:inline-block;font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--midnight);background:var(--gold);padding:1rem 2rem;border-radius:2px;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
+    .become-sponsor-action a:hover{background:var(--sunlight);}
+    .become-sponsor-note{font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--smoke);margin-top:0.6rem;text-align:center;}
+    @media(max-width:700px){.become-sponsor{grid-template-columns:1fr;gap:2rem;} .become-sponsor-action{text-align:left;}}
+
+    /* VOLUNTEERS */
+    .volunteers-block{margin-top:5rem;padding:2.5rem 2.5rem 2rem;background:rgba(255,255,255,0.025);border-left:3px solid var(--ridge);}
+    .volunteers-block h3{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2.5vw,1.6rem);font-weight:700;color:var(--cream);margin-bottom:1rem;}
+    .volunteers-block p{color:var(--parchment);font-size:0.95rem;line-height:1.8;margin-bottom:0.8rem;}
+    .volunteers-names{font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:0.1em;color:var(--gold);line-height:2;}
+
+    /* FOOTER */
+    .footer{background:rgba(3,7,24,0.95);border-top:1px solid rgba(255,255,255,0.05);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:2rem clamp(1.5rem,5vw,4rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(148,163,196,0.35);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(148,163,196,0.35);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--gold);}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-img">ABC</div>
+      <div class="nav-wordmark">Appalachian<span>Bowhunter Challenge</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Recaps</a></li>
+      <li><a href="sponsors.html" class="active">Sponsors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="register.html" class="nav-cta">Register Now</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-eyebrow">The People Behind the Event</div>
+      <h1 class="page-title">Our <em>Sponsors.</em></h1>
+      <p class="page-sub">Their investment wasn't just financial — it was a vote of confidence in what this event stands for.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- FEATURED: MTN TOUGH -->
+    <div class="section-label reveal"><h2>Featured Sponsor</h2></div>
+    <div class="featured-sponsor reveal">
+      <div class="featured-sponsor-eyebrow">Title Sponsor · 2026</div>
+      <div class="featured-sponsor-grid">
+        <div class="featured-sponsor-content">
+          <h2>MTN TOUGH</h2>
+          <div class="featured-sponsor-lead">#1 Fitness App Trusted by the Dedicated</div>
+          <p>MTN TOUGH stepped in as one of the premier partners of the inaugural Appalachian Bowhunter Challenge and made an immediate impact on every competitor in the field.</p>
+          <p>Every athlete received a full year membership to the MTN TOUGH fitness platform — a training system trusted by serious backcountry hunters and mountain athletes across the country. Their support wasn't just another logo on a banner; it directly helped competitors prepare for the physical demands of this event long before the first arrow flew.</p>
+          <p>The mountain exposed weaknesses quickly. The athletes who arrived prepared knew exactly why structured mountain-focused training matters.</p>
+          <a href="https://www.mtntough.com" target="_blank" rel="noopener">Visit MTNTOUGH.com →</a>
+          <div class="featured-sponsor-stat">
+            <span>50</span>
+            Full-year memberships provided to every 2026 competitor
+          </div>
+        </div>
+        <div class="featured-sponsor-logo-box">
+          <!-- Replace with: <img src="mtntough-logo.png" alt="MTN Tough"> -->
+          MTN TOUGH<br>Logo Here
+        </div>
+      </div>
+    </div>
+
+    <!-- GOLD TIER -->
+    <div class="section-label reveal"><h2>Gold Sponsors</h2></div>
+    <div class="tier-intro reveal">
+      <p>These brands brought more than a logo — each one contributed prizes, products, or support that directly elevated the competitor experience from registration to final arrow.</p>
+    </div>
+    <div class="gold-tier-grid">
+
+      <div class="gold-card reveal">
+        <div class="gold-card-logo"><div class="gold-card-logo-ph">Logo Here</div></div>
+        <h3>Mathews Archery</h3>
+        <p>Title prize sponsor — providing the 2026 Grand Champion with a Mathews ARC bow. The benchmark for performance archery equipment.</p>
+        <a href="#" target="_blank" rel="noopener">Visit Mathews →</a>
+      </div>
+
+      <div class="gold-card reveal">
+        <div class="gold-card-logo"><div class="gold-card-logo-ph">Logo Here</div></div>
+        <h3>Flying Squirrel Forge</h3>
+        <p>Handcrafted hunting knives for podium finishers — blades built the old way, for people who take the backcountry seriously.</p>
+        <a href="#" target="_blank" rel="noopener">Visit Flying Squirrel Forge →</a>
+      </div>
+
+      <div class="gold-card reveal">
+        <div class="gold-card-logo"><div class="gold-card-logo-ph">Logo Here</div></div>
+        <h3>Tecumseh Taxidermy</h3>
+        <p>Shoulder mount voucher for the Overall Grand Champion — professional-grade work for a hard-earned trophy.</p>
+        <a href="#" target="_blank" rel="noopener">Visit Tecumseh Taxidermy →</a>
+      </div>
+
+    </div>
+
+    <!-- SUPPORTING SPONSORS -->
+    <div class="section-label reveal"><h2>Supporting Sponsors</h2></div>
+    <div class="support-grid">
+      <div class="support-card reveal">
+        <div class="support-card-logo"><div class="support-card-logo-ph">Logo</div></div>
+        <h4>Sponsor Name</h4>
+        <p>Add your supporting sponsor here.</p>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-logo"><div class="support-card-logo-ph">Logo</div></div>
+        <h4>Sponsor Name</h4>
+        <p>Add your supporting sponsor here.</p>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-logo"><div class="support-card-logo-ph">Logo</div></div>
+        <h4>Sponsor Name</h4>
+        <p>Add your supporting sponsor here.</p>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-logo"><div class="support-card-logo-ph">Logo</div></div>
+        <h4>Sponsor Name</h4>
+        <p>Add your supporting sponsor here.</p>
+      </div>
+    </div>
+
+    <!-- BECOME A SPONSOR -->
+    <div class="become-sponsor reveal">
+      <div>
+        <h3>Become a Sponsor for 2027</h3>
+        <p>The Appalachian Bowhunter Challenge is growing. If your brand speaks to serious hunters, athletes, and outdoor enthusiasts, there's a place for you here. Reach out to discuss sponsorship opportunities for the 2027 event.</p>
+      </div>
+      <div class="become-sponsor-action">
+        <a href="contact.html">Get in Touch</a>
+        <div class="become-sponsor-note">We'll respond within 48 hours</div>
+      </div>
+    </div>
+
+    <!-- VOLUNTEERS -->
+    <div class="volunteers-block reveal">
+      <h3>The Volunteers Who Made It Happen</h3>
+      <p>Events like this don't run on ambition alone. Behind every well-placed target, every hot meal, and every smoothly run detail was a team of volunteers who gave their time without hesitation. They were out there early and stayed late.</p>
+      <p>You donated more than time, money, effort. You poured energy and positivity into this event — and it showed in every corner of it.</p>
+      <div class="volunteers-names">
+        Katrina Stewart &nbsp;·&nbsp; Travis Olson &nbsp;·&nbsp; Rachel Olson &nbsp;·&nbsp; David Howell &nbsp;·&nbsp;
+        Mike Farrah &nbsp;·&nbsp; Ryan Mancuso &nbsp;·&nbsp; Amber Kepler &nbsp;·&nbsp; Dustin Brunty &nbsp;·&nbsp; Norman Stewart
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Appalachian Bowhunter Challenge</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.06});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>
